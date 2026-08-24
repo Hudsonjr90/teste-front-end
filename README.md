@@ -1,29 +1,48 @@
-# Teste Front-End Econverse
+# Teste Econverse - Front-End
 
-A aplicacao foi implementada em React + TypeScript + Sass dentro da pasta [econverse-app](econverse-app).
+Implementacao da vitrine de produtos usando React + TypeScript + Sass.
 
-## Executar localmente
+## Tecnologias
 
-1. Entre na pasta do projeto:
+- React 19
+- TypeScript
+- Vite
+- Sass (SCSS)
 
-```bash
-cd econverse-app
-```
+## Funcionalidades entregues
 
-2. Instale as dependencias:
+- Consumo do JSON de produtos via `fetch`
+- Renderizacao da vitrine em grid
+- Modal com detalhes ao clicar em um produto
+- Fechamento do modal por clique fora e tecla `Esc`
+- HTML semantico e metadados basicos de SEO
+
+## Como executar
+
+1. Instale as dependencias:
 
 ```bash
 npm install
 ```
 
-3. Rode em desenvolvimento:
+2. Rode em desenvolvimento:
 
 ```bash
 npm run dev
 ```
 
-4. Build de producao:
+3. Gere build de producao:
 
 ```bash
 npm run build
 ```
+
+4. Rode o lint:
+
+```bash
+npm run lint
+```
+
+## API utilizada
+
+- https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json

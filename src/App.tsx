@@ -21,13 +21,13 @@ const PRODUCT_SOURCES = [
 ]
 
 const navItems = [
-  'TODAS CATEGORIAS',
-  'SUPERMERCADO',
-  'LIVROS',
-  'MODA',
-  'LANCAMENTOS',
-  'OFERTAS DO DIA',
-  'ASSINATURA',
+  { label: 'TODAS CATEGORIAS', href: '#categorias' },
+  { label: 'SUPERMERCADO', href: '#produtos' },
+  { label: 'LIVROS', href: '#produtos' },
+  { label: 'MODA', href: '#produtos' },
+  { label: 'LANCAMENTOS', href: '#produtos' },
+  { label: 'OFERTAS DO DIA', href: '#produtos' },
+  { label: 'ASSINATURA', href: '#newsletter' },
 ]
 
 const shortcutItems = [
@@ -111,12 +111,18 @@ function App() {
       <img className="header-icon" src={header} alt="" aria-hidden="true" />
 
       <header className="main-header">
-        <a className="brand" href="#" aria-label="Econverse">
+        <a className="brand" href="/" aria-label="Econverse">
           <span>eco</span>nverse
         </a>
-        <label className="search" aria-label="Campo de busca">
+        <label className="search" htmlFor="search-input">
           <img className="search__icon" src={searchIcon} alt="" aria-hidden="true" />
-          <input type="search" placeholder="o que voce esta buscando?" />
+          <input
+            id="search-input"
+            name="q"
+            type="search"
+            placeholder="o que voce esta buscando?"
+            aria-label="Pesquisar produtos"
+          />
         </label>
         <div className="header-actions" aria-hidden="true">
           <img src={someIcon} alt="" />
@@ -125,8 +131,12 @@ function App() {
 
       <nav className="departments" aria-label="Categorias principais">
         {navItems.map((item) => (
-          <a key={item} href="#" className={item === 'OFERTAS DO DIA' ? 'is-active' : ''}>
-            {item}
+          <a
+            key={item.label}
+            href={item.href}
+            className={item.label === 'OFERTAS DO DIA' ? 'is-active' : ''}
+          >
+            {item.label}
           </a>
         ))}
       </nav>
@@ -142,7 +152,7 @@ function App() {
       </section>
 
       <main className="page">
-        <section className="shortcuts" aria-label="Atalhos de categorias">
+        <section id="categorias" className="shortcuts" aria-label="Atalhos de categorias">
           {shortcutItems.map((item, index) => (
             <article key={item.label} className={index === 0 ? 'is-highlighted' : ''}>
               <div className="shortcut-icon" aria-hidden="true">
@@ -161,12 +171,13 @@ function App() {
             {showcaseRows.map((row, rowIndex) => (
               <section
                 key={`showcase-${rowIndex}`}
+                id={rowIndex === 0 ? 'produtos' : undefined}
                 className="showcase"
                 aria-label="Produtos relacionados"
               >
                 <header className="section-title">
                   <h2>Produtos relacionados</h2>
-                  {rowIndex > 0 && <a href="#">Ver todos</a>}
+                  {rowIndex > 0 && <a href="#produtos">Ver todos</a>}
                 </header>
 
                 {rowIndex === 0 && (
@@ -231,25 +242,36 @@ function App() {
         )}
       </main>
 
-      <section className="newsletter" aria-label="Newsletter">
+      <section id="newsletter" className="newsletter" aria-label="Newsletter">
         <div className="newsletter__content">
           <h2>Inscreva-se na nossa newsletter</h2>
           <p>Assine a nossa newsletter e receba as novidades e conteudos exclusivos da Econverse.</p>
         </div>
 
-        <form className="newsletter__form">
-          <input type="text" placeholder="Digite seu nome" />
-          <input type="email" placeholder="Digite seu e-mail" />
+        <form className="newsletter__form" aria-label="Formulario de newsletter">
+          <label className="sr-only" htmlFor="newsletter-name">
+            Digite seu nome
+          </label>
+          <input id="newsletter-name" name="name" type="text" placeholder="Digite seu nome" />
+          <label className="sr-only" htmlFor="newsletter-email">
+            Digite seu e-mail
+          </label>
+          <input
+            id="newsletter-email"
+            name="email"
+            type="email"
+            placeholder="Digite seu e-mail"
+          />
           <button type="submit">INSCREVER</button>
-          <label>
-            <input type="checkbox" /> Aceito os termos e condicoes
+          <label htmlFor="newsletter-terms">
+            <input id="newsletter-terms" name="terms" type="checkbox" /> Aceito os termos e condicoes
           </label>
         </form>
       </section>
 
       <footer className="site-footer">
         <section className="site-footer__brand">
-          <a className="brand" href="#">
+          <a className="brand" href="/" aria-label="Econverse">
             <span>eco</span>nverse
           </a>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -260,23 +282,23 @@ function App() {
 
         <section>
           <h3>Institucional</h3>
-          <a href="#">Sobre nos</a>
-          <a href="#">Movimento</a>
-          <a href="#">Trabalhe conosco</a>
+          <a href="/sobre">Sobre nos</a>
+          <a href="/movimento">Movimento</a>
+          <a href="/trabalhe-conosco">Trabalhe conosco</a>
         </section>
 
         <section>
           <h3>Ajuda</h3>
-          <a href="#">Suporte</a>
-          <a href="#">Fale conosco</a>
-          <a href="#">Perguntas frequentes</a>
+          <a href="/suporte">Suporte</a>
+          <a href="/fale-conosco">Fale conosco</a>
+          <a href="/perguntas-frequentes">Perguntas frequentes</a>
         </section>
 
         <section>
           <h3>Termos</h3>
-          <a href="#">Termos e condicoes</a>
-          <a href="#">Politica de privacidade</a>
-          <a href="#">Troca e devolucao</a>
+          <a href="/termos-e-condicoes">Termos e condicoes</a>
+          <a href="/politica-de-privacidade">Politica de privacidade</a>
+          <a href="/troca-e-devolucao">Troca e devolucao</a>
         </section>
       </footer>
 
