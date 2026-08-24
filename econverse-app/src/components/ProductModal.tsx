@@ -11,7 +11,15 @@ const priceFormatter = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
 })
 
+const installmentFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+  minimumFractionDigits: 2,
+})
+
 export function ProductModal({ product, onClose }: ProductModalProps) {
+  const installmentValue = product.price / 10
+
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -52,11 +60,33 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           <h2 id="modal-title" className="modal__title">
             {product.productName}
           </h2>
-          <p className="modal__description">{product.descriptionShort}</p>
           <p className="modal__price">{priceFormatter.format(product.price)}</p>
-          <button type="button" className="modal__buy">
-            Finalizar compra
-          </button>
+          <p className="modal__description">
+            Muitos produtos de tecnologia com condicoes especiais para voce.
+          </p>
+          <a className="modal__details" href="#">
+            Veja mais detalhes do produto &gt;
+          </a>
+
+          <div className="modal__actions">
+            <div className="modal__quantity" aria-label="Quantidade">
+              <button type="button" aria-label="Diminuir quantidade">
+                -
+              </button>
+              <span>01</span>
+              <button type="button" aria-label="Aumentar quantidade">
+                +
+              </button>
+            </div>
+
+            <button type="button" className="modal__buy">
+              COMPRAR
+            </button>
+          </div>
+
+          <p className="modal__installments">
+            ou 10x de {installmentFormatter.format(installmentValue)} sem juros
+          </p>
         </div>
       </article>
     </div>

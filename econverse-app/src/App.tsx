@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { ProductModal } from './components/ProductModal'
 import type { Product, ProductApiResponse } from './types/product'
+import header from './assets/icons/header.svg'
+import searchIcon from './assets/icons/search.svg'
+import someIcon from './assets/icons/some.svg'
+import tecIcon from './assets/icons/tec.svg'
+import mktIcon from './assets/icons/mkt.svg'
+import drkIcon from './assets/icons/drk.svg'
+import tooIcon from './assets/icons/too.svg'
+import heaIcon from './assets/icons/hea.svg'
+import fitIcon from './assets/icons/fit.svg'
+import modIcon from './assets/icons/mod.svg'
+import social from './assets/icons/social.svg'
 
 const PRODUCT_SOURCES = [
   '/api/produtos.json',
   'https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json',
   '/produtos.json',
-]
-
-const topInfos = [
-  'Compra 100% segura',
-  'Frete gratis acima de R$ 200',
-  'Parcele suas compras',
 ]
 
 const navItems = [
@@ -26,13 +31,13 @@ const navItems = [
 ]
 
 const shortcutItems = [
-  'Tecnologia',
-  'Supermercado',
-  'Bebidas',
-  'Ferramentas',
-  'Saude',
-  'Esportes e Fitness',
-  'Moda',
+  { label: 'Tecnologia', icon: tecIcon },
+  { label: 'Supermercado', icon: mktIcon },
+  { label: 'Bebidas', icon: drkIcon },
+  { label: 'Ferramentas', icon: tooIcon },
+  { label: 'Saude', icon: heaIcon },
+  { label: 'Esportes e Fitness', icon: fitIcon },
+  { label: 'Moda', icon: modIcon },
 ]
 
 const tabItems = ['CELULAR', 'ACESSORIOS', 'TABLETS', 'NOTEBOOKS', 'TVS', 'VER TODOS']
@@ -103,24 +108,18 @@ function App() {
 
   return (
     <div className="site-shell">
-      <div className="top-strip">
-        {topInfos.map((item) => (
-          <p key={item}>{item}</p>
-        ))}
-      </div>
+      <img className="header-icon" src={header} alt="" aria-hidden="true" />
 
       <header className="main-header">
         <a className="brand" href="#" aria-label="Econverse">
           <span>eco</span>nverse
         </a>
         <label className="search" aria-label="Campo de busca">
+          <img className="search__icon" src={searchIcon} alt="" aria-hidden="true" />
           <input type="search" placeholder="o que voce esta buscando?" />
         </label>
         <div className="header-actions" aria-hidden="true">
-          <span>i</span>
-          <span>c</span>
-          <span>o</span>
-          <span>n</span>
+          <img src={someIcon} alt="" />
         </div>
       </header>
 
@@ -145,11 +144,11 @@ function App() {
       <main className="page">
         <section className="shortcuts" aria-label="Atalhos de categorias">
           {shortcutItems.map((item, index) => (
-            <article key={item} className={index === 0 ? 'is-highlighted' : ''}>
+            <article key={item.label} className={index === 0 ? 'is-highlighted' : ''}>
               <div className="shortcut-icon" aria-hidden="true">
-                <span></span>
+                <img src={item.icon} alt="" />
               </div>
-              <p>{item}</p>
+              <p>{item.label}</p>
             </article>
           ))}
         </section>
@@ -233,12 +232,12 @@ function App() {
       </main>
 
       <section className="newsletter" aria-label="Newsletter">
-        <div>
+        <div className="newsletter__content">
           <h2>Inscreva-se na nossa newsletter</h2>
-          <p>Assine e receba conteudos exclusivos da Econverse.</p>
+          <p>Assine a nossa newsletter e receba as novidades e conteudos exclusivos da Econverse.</p>
         </div>
 
-        <form>
+        <form className="newsletter__form">
           <input type="text" placeholder="Digite seu nome" />
           <input type="email" placeholder="Digite seu e-mail" />
           <button type="submit">INSCREVER</button>
@@ -249,11 +248,14 @@ function App() {
       </section>
 
       <footer className="site-footer">
-        <section>
+        <section className="site-footer__brand">
           <a className="brand" href="#">
             <span>eco</span>nverse
           </a>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <div className="site-footer__social" aria-label="Redes sociais">
+            <img src={social} alt="Redes sociais" />
+          </div>
         </section>
 
         <section>
@@ -277,6 +279,8 @@ function App() {
           <a href="#">Troca e devolucao</a>
         </section>
       </footer>
+
+      <p className="footer-note">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
       {selectedProduct && (
         <ProductModal
